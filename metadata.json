@@ -1,0 +1,15 @@
+{
+  "name": "puppet-cpanm",
+  "version": "0.1.0",
+  "author": "James McDonald <james@jamesmcdonald.com>",
+  "summary": "Manage perl modules with cpanminus",
+  "license": "Apache-2.0",
+  "source": "https://github.com/jamesmcdonald/puppet-cpanm.git",
+  "project_page": "https://github.com/jamesmcdonald/puppet-cpanm",
+  "issues_url": "https://github.com/jamesmcdonald/puppet-cpanm/issues",
+  "dependencies": [
+    {"name":"puppetlabs-stdlib","version_requirement":">= 1.0.0"}
+  ],
+  "data_provider": null
+}
+
