@@ -17,10 +17,24 @@ Puppet::Type.newtype(:cpanm) do
 
     newvalue(:latest) do
       unless provider.latest?
+        Puppet.info('not latest, going to create')
         provider.create
+        return
       end
-      Puppet.notice('wat')
-      return :present
+      Puppet.notice('falling off the end, this will look like a change')
+    end
+
+    def should_to_s(newvalue = @should)
+        Puppet.debug("Should is #{newvalue}")
+        if provider.latest?
+            'latest'
+        else
+            newvalue.to_s
+        end
+    end
+
+    def change_to_s(current, new)
+        super current, new
     end
   end
 

@@ -6,12 +6,12 @@ Puppet::Type.type(:cpanm).provide(:default) do
 
   def latest?
     installed=`perl -m#{@resource[:name]} -e 'print $#{@resource[:name]}::VERSION' 2>/dev/null`
-    cpan=`cpanm --info #{@resource[:name]} | tail -1`.match(/[0-9]+\.?[0-9]*/)
+    cpan=`cpanm --info #{@resource[:name]} | tail -1`.match(/([0-9]+\.?[0-9]*).tar.gz/)
     if cpan
-      latest = cpan[0]
+      latest = cpan[1]
       Puppet.debug("Installed: #{installed}, CPAN: #{latest}")
       if latest > installed
-        Puppet.debug('wat')
+        Puppet.debug('Ruby thinks CPAN is newer, so upgrades will happen now')
         return false
       end
     end
@@ -34,7 +34,7 @@ Puppet::Type.type(:cpanm).provide(:default) do
     command = "cpanm #{options} #{@resource[:name]}"
     Puppet.debug(command)
     if !system(command)
-      return false
+      raise Puppet::Error, "install of CPAN module #{@resource[:name]} failed"
     end
   end
 
