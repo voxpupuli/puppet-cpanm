@@ -1,7 +1,9 @@
 Puppet::Type.newtype(:cpanm) do
   @doc = "Manage CPAN modules with cpanminus"
   ensurable do
-    defaultto :present
+    attr_accessor :latest
+
+    defaultto :installed
     newvalue(:absent) do
       if provider.exists?
         provider.destroy
@@ -24,21 +26,30 @@ Puppet::Type.newtype(:cpanm) do
       Puppet.notice('falling off the end, this will look like a change')
     end
 
-    def should_to_s(newvalue = @should)
-        Puppet.debug("Should is #{newvalue}")
-        if provider.latest?
-            'latest'
-        else
-            newvalue.to_s
-        end
+    def insync?(is)
+      @should.each do |should|
+        Puppet.info("Should #{should}, is #{is}")
+      case should
+      when :present
+        return true if is == :present
+      when :latest
+        return false if is == :absent
+        return true if provider.latest?
+      when :absent
+        return true if is == :absent
+      end
+      end
+      false
     end
 
-    def change_to_s(current, new)
-        super current, new
-    end
   end
 
-  newparam(:name) do
+  # Make sure cpanm installation happens first
+  autorequire(:class) do
+    'cpanm'
+  end
+
+  newparam(:name, :namevar => true) do
     desc "The CPAN module to manage"
   end
 
