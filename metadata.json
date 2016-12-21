@@ -1,12 +1,22 @@
 {
   "name": "jamesmcdonald-cpanm",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "author": "James McDonald <james@jamesmcdonald.com>",
   "summary": "Manage perl modules with cpanminus",
-  "license": "Perl",
+  "license": "Artistic-1.0-Perl",
   "source": "https://github.com/jamesmcdonald/puppet-cpanm.git",
   "project_page": "https://github.com/jamesmcdonald/puppet-cpanm",
   "issues_url": "https://github.com/jamesmcdonald/puppet-cpanm/issues",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": ["5.0", "6.0", "7.0"]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": ["8.0"]
+    }
+  ],
   "dependencies": [
   ],
   "data_provider": null
