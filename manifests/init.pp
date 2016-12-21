@@ -40,7 +40,7 @@
 # Copyright 2016 James McDonald, unless otherwise noted.
 #
 class cpanm {
-  if $osfamily == 'RedHat' and $::operatingsystemmajrelease in ['6','7'] {
+  if $::osfamily == 'RedHat' and $::operatingsystemmajrelease in ['6','7'] {
     $packages = ['perl', 'make', 'gcc', 'perl-core']
   } else {
     $packages = ['perl', 'make', 'gcc']
@@ -56,7 +56,7 @@ class cpanm {
   }
 
   exec {'/usr/bin/perl /var/cache/cpanm-install -n App::cpanminus':
-    unless => '/usr/bin/test -x /usr/bin/cpanm -o -x /usr/local/bin/cpanm',
+    unless  => '/usr/bin/test -x /usr/bin/cpanm -o -x /usr/local/bin/cpanm',
     require => [File['/var/cache/cpanm-install'], Package['perl', 'gcc']],
   }
 }
