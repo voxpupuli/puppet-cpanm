@@ -10,74 +10,92 @@
 1. [Usage - Configuration options and additional functionality](#usage)
 1. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 1. [Limitations - OS compatibility, etc.](#limitations)
+    * [Known Issues](#known-issues)
 1. [Development - Guide for contributing to the module](#development)
 
 ## Description
 
-Start with a one- or two-sentence summary of what the module does and/or what
-problem it solves. This is your 30-second elevator pitch for your module.
-Consider including OS/Puppet version it works with.
+The cpanm module manages CPAN packages using the cpanminus package. It exists
+to provide a simple way to install CPAN modules with the option to not run test
+suites.  The intent is that it should work with Debianish and Redhatty
+distributions.
 
-You can give more descriptive information in a second paragraph. This paragraph
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?" If your module has a range of functionality (installation, configuration,
-management, etc.), this is the time to mention it.
+The module provides a class `cpanm` which will install Perl components, gcc,
+make and cpanminus itself. It also provides a resource type `cpanm` which you
+can use to manage modules in more or less the same way as `package` works.
 
 ## Setup
 
-### What cpanm affects **OPTIONAL**
+### What cpanm affects
 
-If it's obvious what your module touches, you can skip this section. For
-example, folks can probably figure out that your mysql_instance module affects
-their MySQL instances.
+This module will currently automatically install the following packages:
+* perl
+* gcc
+* make
+* perl-core on RHEL6-7
 
-If there's more that they should know about, though, this is the place to mention:
+This might cause conflicts if you include them elsewhere.
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
+### Setup Requirements
 
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you might want to include an additional "Upgrading" section
-here.
+This module contains a custom type, so you must make sure pluginsync is enabled
+if you are using a puppet master.
 
 ### Beginning with cpanm
 
-The very basic steps needed for a user to get the module up and running. This
-can include setup steps, if necessary, or it can be an example of the most
-basic use of the module.
+```
+include cpanm
+
+cpanm {'CGI':
+  ensure => latest,
+}
+```
 
 ## Usage
 
-This section is where you describe how to customize, configure, and do the
-fancy stuff with your module here. It's especially helpful if you include usage
-examples and code samples for doing things with your module.
+The `cpanm` resource supports additional parameters, `test` and `force`, to
+enable CPAN tests and force CPAN installation respectively.
 
 ## Reference
 
-Here, include a complete list of your module's classes, types, providers,
-facts, along with the parameters for each. Users refer to this section (thus
-the name "Reference") to find specific details; most users don't read it per
-se.
+The `cpanm` class currently supports no parameters.
+
+The `cpanm` resource supports:
+
+* `ensure`
+  absent, present or latest.
+
+* `force`
+  Pass the '-f' (force) option to  CPAN installation. Boolean, default is false.
+  This only has an effect on installation or upgrade. It does nothing unless
+  the value of `ensure` causes a change to be made.
+
+* `test`
+  Run CPAN tests. Boolean, default is false.
+
+The module contains a copy of cpanminus, which is used to bootstrap installing itself.
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc. If there
-are Known Issues, you might want to include them under their own heading here.
+The module is tested on RHEL 5-7 and Debian Jessie. It should work properly in
+those environments, but it is relatively simple, so it may well work in similar
+environements without modification. If you need specific changes for your
+environment, feel free to send them!
+
+### Known Issues
+
+The listing of installed CPAN modules is based on `perldoc perllocal`. This
+generally works well, but doesn't get updated when you remove a CPAN module.
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
+If you make improvements or fixes, please feel free to send a PR on Github.
+This module exists to solve a specific problem for me, but I'm quite happy to
+extend it to support other people's use cases.
 
-## Release Notes/Contributors/Etc. **Optional**
+## Contributors
 
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You can also add any additional sections you feel
-are necessary or important to include here. Please use the `## ` header.
+This module contains a copy of cpanminus retrieved from https://cpanmin.us.
+[App::cpanminus](http://search.cpan.org/~miyagawa/App-cpanminus-1.7042/lib/App/cpanminus.pm)
+is written by Tatsuhiko Miyagawa and distributed under the same terms as Perl.
+You can read more details about contributors via the link.
