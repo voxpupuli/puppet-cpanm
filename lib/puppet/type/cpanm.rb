@@ -19,16 +19,13 @@ Puppet::Type.newtype(:cpanm) do
 
     newvalue(:latest) do
       unless provider.latest?
-        Puppet.info('not latest, going to create')
         provider.create
         return
       end
-      Puppet.notice('falling off the end, this will look like a change')
     end
 
     def insync?(is)
       @should.each do |should|
-        Puppet.info("Should #{should}, is #{is}")
       case should
       when :present
         return true if is == :present
