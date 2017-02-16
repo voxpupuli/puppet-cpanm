@@ -44,6 +44,6 @@ $modules = [
   'XML::Smart',
   'YAML',
   'local::lib',
-];
+]
 
 cpanm {$modules: ensure => absent}

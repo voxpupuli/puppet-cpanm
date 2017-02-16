@@ -52,7 +52,7 @@ $modules = [
   'XML::Smart',
   'YAML',
   'local::lib',
-];
+]
 
 cpanm {$modules: ensure =>  latest}
 
