@@ -11,7 +11,15 @@ Puppet::Type.type(:cpanm).provide(:default) do
     rescue Puppet::ExecutionFailure
       installed=''
     end
-    cpan=cpanm('--info', "#{@resource[:name]}").split("\n")[-1].match(/([0-9]+\.?[0-9]*).tar.gz/)
+    options = []
+    if @resource[:mirror]
+      options << "--from"
+      options << @resource[:mirror]
+    end
+    options << '--info'
+    options << @resource[:name]
+
+    cpan=cpanm(options).split("\n")[-1].match(/([0-9]+\.?[0-9]*).tar.gz/)
     if cpan
       latest = cpan[1]
       Puppet.debug("Installed: #{installed}, CPAN: #{latest}")
@@ -25,6 +33,11 @@ Puppet::Type.type(:cpanm).provide(:default) do
   def create
     options = []
 
+    if @resource[:mirror]
+      options << "--from"
+      options << @resource[:mirror]
+    end
+
     if @resource[:force] == :true
       options << "-f"
     end
@@ -33,13 +46,15 @@ Puppet::Type.type(:cpanm).provide(:default) do
       options << "-n"
     end
 
-    cpanm(*options, resource[:name])
+    options << @resource[:name]
+
+    cpanm(options)
   end
 
   #  alias update create
   def destroy
     begin
-      cpanm '-U', '-f', resource[:name]
+      cpanm '-U', '-f', @resource[:name]
     rescue Puppet::ExecutionFailure
       #error = Puppet::Error.new("Failed to remove CPAN package: #{e}")
       #error.set_backtrace(e.backtrace)

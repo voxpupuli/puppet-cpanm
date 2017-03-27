@@ -59,4 +59,8 @@ Puppet::Type.newtype(:cpanm) do
     desc "Run CPAN module tests"
     defaultto :false
   end
+
+  newparam(:mirror) do
+    desc "URL of the CPAN mirror to use"
+  end
 end

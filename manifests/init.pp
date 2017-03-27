@@ -8,26 +8,25 @@
 #
 # Document parameters here.
 #
-# * `sample parameter`
-# Explanation of what this parameter affects and what it defaults to.
-# e.g. "Specify one or more upstream ntp servers as an array."
+# * `mirror`
+# A CPAN mirror to use to retrieve packages. This is passed to
+# `cpanm` as `--from`, meaning that only this mirror will be used.
 #
 # Variables
 # ----------
 #
-# * `managepackages`
-#  Whether to manage the packages `gcc`, `make` and `perl`
-#  Explanation of how this variable affects the function of this class and if
-#  it has a default. e.g. "The parameter enc_ntp_servers must be set by the
-#  External Node Classifier as a comma separated list of hostnames." (Note,
-#  global variables should be avoided in favor of class parameters as
-#  of Puppet 2.6.)
+# None
 #
 # Examples
 # --------
 #
 # @example
 #    include cpanm
+#
+# @example
+#    class {'cpanm':
+#      mirror =>  'http://mirror.my.org/cpan/',
+#    }
 #
 # Authors
 # -------
@@ -37,9 +36,11 @@
 # Copyright
 # ---------
 #
-# Copyright 2016 James McDonald, unless otherwise noted.
+# Copyright 2016-2017 James McDonald, unless otherwise noted.
 #
-class cpanm {
+class cpanm (
+  $mirror = undef,
+){
   if $::osfamily == 'RedHat' and $::operatingsystemmajrelease in ['6','7'] {
     $packages = ['perl', 'make', 'gcc', 'perl-core']
   } else {
@@ -55,7 +56,11 @@ class cpanm {
     source => 'puppet:///modules/cpanm/cpanm',
   }
 
-  exec {'/usr/bin/perl /var/cache/cpanm-install -n App::cpanminus':
+  $from = $mirror ? {
+    undef   => '',
+    default => "--from ${mirror}",
+  }
+  exec {"/usr/bin/perl /var/cache/cpanm-install ${from} -n App::cpanminus":
     unless  => '/usr/bin/test -x /usr/bin/cpanm -o -x /usr/local/bin/cpanm',
     require => [File['/var/cache/cpanm-install'], Package['perl', 'gcc']],
   }
