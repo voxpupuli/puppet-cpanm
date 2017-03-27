@@ -58,11 +58,7 @@ Puppet::Type.type(:cpanm).provide(:default) do
   def self.instances
     modules = {}
     name = nil
-    if ENV.include?('TERM')
-      term = ENV['TERM']
-      ENV['TERM'] = 'dumb'
-    end
-    perldoc('perllocal').split("\n").each do |r|
+    perldoc('-tT', 'perllocal').split("\n").each do |r|
       if r.include?('"Module"') then
         name = r.split[-1]
         modules[name] = new(:name => name)
@@ -71,9 +67,6 @@ Puppet::Type.type(:cpanm).provide(:default) do
         r.split[-1].delete('"')
         #modules[name].version = version
       end
-    end
-    if ENV.include? 'TERM'
-      ENV['term'] = term
     end
     modules.map do |k,v| v end
   end
