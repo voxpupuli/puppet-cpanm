@@ -6,16 +6,9 @@
 # Parameters
 # ----------
 #
-# Document parameters here.
-#
 # * `mirror`
-# A CPAN mirror to use to retrieve packages. This is passed to
+# A CPAN mirror to use to retrieve App::cpanminus. This is passed to
 # `cpanm` as `--from`, meaning that only this mirror will be used.
-#
-# Variables
-# ----------
-#
-# None
 #
 # Examples
 # --------

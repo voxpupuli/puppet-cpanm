@@ -58,7 +58,11 @@ enable CPAN tests and force CPAN installation respectively.
 
 ## Reference
 
-The `cpanm` class currently supports no parameters.
+The `cpanm` class currently supports one parameter:
+
+* `mirror`
+  A CPAN mirror to use to retrieve App::cpanminus. This is passed to
+  `cpanm` as `--from`, meaning that only this mirror will be used.
 
 The `cpanm` resource supports:
 
@@ -70,6 +74,10 @@ The `cpanm` resource supports:
   This only has an effect on installation or upgrade. It does nothing unless
   the value of `ensure` causes a change to be made.
 
+* `mirror`
+  A CPAN mirror to use to retrieve packages. This is passed to
+  `cpanm` as `--from`, meaning that only this mirror will be used.
+
 * `test`
   Run CPAN tests. Boolean, default is false.
 
@@ -79,7 +87,7 @@ The module contains a copy of cpanminus, which is used to bootstrap installing i
 
 The module is tested on RHEL 5-7 and Debian Jessie. It should work properly in
 those environments, but it is relatively simple, so it may well work in similar
-environements without modification. If you need specific changes for your
+environments without modification. If you need specific changes for your
 environment, feel free to send them!
 
 ### Known Issues
