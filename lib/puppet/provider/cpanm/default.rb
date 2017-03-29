@@ -5,6 +5,16 @@ Puppet::Type.type(:cpanm).provide(:default) do
   commands :perl => 'perl'
   commands :perldoc => 'perldoc'
 
+  # Override the `commands`-generated cpanm method to avoid resetting locale to 'C'
+  # Avoids triggering an old Encode bug in MakeMakeFiles for some modules
+  def cpanm(*args)
+    result = `cpanm #{args.join ' '}`
+    if $? != 0
+      raise Puppet::ExecutionFailure, result
+    end
+    return result
+  end
+
   def latest?
     begin
       installed=perl "-m#{@resource[:name]}", "-eprint $#{@resource[:name]}::VERSION",  '2>/dev/null'
