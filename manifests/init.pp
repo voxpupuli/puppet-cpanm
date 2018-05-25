@@ -40,9 +40,7 @@ class cpanm (
     $packages = ['perl', 'make', 'gcc']
   }
 
-  package {$packages:
-    ensure => present,
-  }
+  ensure_packages($packages, { 'ensure' => 'present'})
 
   file {'/var/cache/cpanm-install':
     ensure => file,
