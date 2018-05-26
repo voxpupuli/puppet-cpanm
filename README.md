@@ -34,7 +34,13 @@ This module will currently automatically install the following packages:
 * make
 * perl-core on RHEL6-7
 
-This might cause conflicts if you include them elsewhere.
+These are installed using
+[`ensure_packages`](https://github.com/puppetlabs/puppetlabs-stdlib#ensure_packages),
+so shouldn't cause conflicts if you have them managed elsewhere.
+
+It will also install `cpanm` itself in a standard directory, generally
+`/usr/bin` or `/usr/local/bin` and a copy of `cpanm` used for bootstrapping in
+`/var/cache/cpanm-install`.
 
 ### Setup Requirements
 
@@ -53,8 +59,10 @@ cpanm {'CGI':
 
 ## Usage
 
-The `cpanm` resource supports additional parameters, `test` and `force`, to
-enable CPAN tests and force CPAN installation respectively.
+Both the `cpanm` class and resource support a `mirror` parameter to control
+which CPAN archive packages are fetched from. The `cpanm` resource supports
+additional parameters, `test` and `force`, to enable CPAN tests and force CPAN
+installation respectively.
 
 ## Reference
 
@@ -85,10 +93,10 @@ The module contains a copy of cpanminus, which is used to bootstrap installing i
 
 ## Limitations
 
-The module is tested on RHEL 5-7 and Debian Jessie. It should work properly in
-those environments, but it is relatively simple, so it may well work in similar
-environments without modification. If you need specific changes for your
-environment, feel free to send them!
+The module is tested on RHEL 5-7 and Debian Jessie and Stretch. It should work
+properly in those environments, but it is relatively simple, so it may well
+work in similar environments without modification. If you need specific changes
+for your environment, feel free to send them!
 
 ### Known Issues
 
@@ -104,6 +112,6 @@ extend it to support other people's use cases.
 ## Contributors
 
 This module contains a copy of cpanminus retrieved from https://cpanmin.us.
-[App::cpanminus](http://search.cpan.org/~miyagawa/App-cpanminus-1.7042/lib/App/cpanminus.pm)
+[App::cpanminus](https://metacpan.org/pod/App::cpanminus)
 is written by Tatsuhiko Miyagawa and distributed under the same terms as Perl.
 You can read more details about contributors via the link.
