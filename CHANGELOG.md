@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.9.7] - 2018-05-26
 ### Added
 - Added this changelog.
 - Updated bundled `cpanm` to 1.7044.
@@ -64,7 +66,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Initial code.
 - Bundled a copy of cpanminus for bootstrapping.
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.9.6...HEAD
+[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.9.7...HEAD
+[0.9.7]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.9.6...v0.9.7
 [0.9.6]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.9.5...v0.9.6
 [0.9.5]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.9.4...v0.9.5
 [0.9.4]: https://github.com/olivierlacan/keep-a-changelog/compare/v0.9.3...v0.9.4
