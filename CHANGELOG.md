@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Added this changelog.
+- Updated bundled `cpanm` to 1.7044.
 
 ## [0.9.6] - 2018-05-26
 ### Changed
