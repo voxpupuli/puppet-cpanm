@@ -74,7 +74,7 @@ Puppet::Type.type(:cpanm).provide(:default) do
 
   def exists?
     begin
-      perl "-M#{@resource[:name]}", '-e1', '>/dev/null', '2>&1'
+      perl "-m#{@resource[:name]}", '-e1', '>/dev/null', '2>&1'
     rescue Puppet::ExecutionFailure
       false
     end
