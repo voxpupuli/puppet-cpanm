@@ -73,7 +73,7 @@ The `cpanm` class currently supports one parameter:
   `cpanm` as `--from`, meaning that only this mirror will be used.
 
 * `lwpbootstrap`
-  Option to pass --no-lwp in the bootstrap command.  Default: `false`.
+  Option to pass `--no-lwp` in the bootstrap command.  Default: `false`.
 
 The `cpanm` resource supports:
 

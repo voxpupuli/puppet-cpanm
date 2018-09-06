@@ -35,7 +35,7 @@ describe 'cpanm' do
   end
   context 'on Debian with mirror and lwpbootstraparg ' do
     let(:params) {
-        { 
+        {
           :mirror          => 'http://mirror.test.anywhere/cpan/',
           :lwpbootstraparg => true
         }
@@ -73,9 +73,9 @@ describe 'cpanm' do
     it { should contain_exec('/usr/bin/perl /var/cache/cpanm-install  -n App::cpanminus ') }
   end
 
-  context 'on Debian with mirror and lwpbootstraparg ' do
+  context 'on RHEL7 with mirror and lwpbootstraparg ' do
     let(:params) {
-        { 
+        {
           :mirror          => 'http://mirror.test.anywhere/cpan/',
           :lwpbootstraparg => true
         }
@@ -97,6 +97,4 @@ describe 'cpanm' do
     }
     it { should contain_exec('/usr/bin/perl /var/cache/cpanm-install --from http://mirror.test.anywhere/cpan/ -n App::cpanminus --no-lwp') }
   end
-
-
 end
