@@ -32,7 +32,8 @@
 # Copyright 2016-2017 James McDonald, unless otherwise noted.
 #
 class cpanm (
-  $mirror = undef,
+  $mirror          = undef,
+  $lwpbootstraparg = false,
 ){
   if $::osfamily == 'RedHat' and $::operatingsystemmajrelease in ['6','7'] {
     $packages = ['perl', 'make', 'gcc', 'perl-core']
@@ -47,11 +48,19 @@ class cpanm (
     source => 'puppet:///modules/cpanm/cpanm',
   }
 
+
   $from = $mirror ? {
     undef   => '',
     default => "--from ${mirror}",
   }
-  exec {"/usr/bin/perl /var/cache/cpanm-install ${from} -n App::cpanminus":
+
+  if ($lwpbootstraparg) {
+    $lwparg = '--no-lwp'
+  } else {
+    $lwparg = ''
+  }
+
+  exec {"/usr/bin/perl /var/cache/cpanm-install ${from} -n App::cpanminus ${lwparg}":
     unless  => '/usr/bin/test -x /usr/bin/cpanm -o -x /usr/local/bin/cpanm',
     require => [File['/var/cache/cpanm-install'], Package['perl', 'gcc']],
   }
