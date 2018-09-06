@@ -53,13 +53,13 @@ class cpanm (
     undef   => '',
     default => "--from ${mirror}",
   }
-  
+
   if ($lwpbootstraparg) {
-    $lwparg = "--no-lwp"
+    $lwparg = '--no-lwp'
   } else {
-    $lwparg = ""
+    $lwparg = ''
   }
-  
+
   exec {"/usr/bin/perl /var/cache/cpanm-install ${from} -n App::cpanminus ${lwparg}":
     unless  => '/usr/bin/test -x /usr/bin/cpanm -o -x /usr/local/bin/cpanm',
     require => [File['/var/cache/cpanm-install'], Package['perl', 'gcc']],
