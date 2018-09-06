@@ -72,6 +72,9 @@ The `cpanm` class currently supports one parameter:
   A CPAN mirror to use to retrieve App::cpanminus. This is passed to
   `cpanm` as `--from`, meaning that only this mirror will be used.
 
+* `lwpbootstrap`
+  Option to pass --no-lwp in the bootstrap command.  Default: `false`.
+
 The `cpanm` resource supports:
 
 * `ensure`
