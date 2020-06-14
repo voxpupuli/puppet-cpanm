@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## Unreleased
 
+## [0.9.10] - 2020-06-14
+### Changed
+- Merged PR#7 from arpagon to change the top version limit for stdlib
+  to <7.0.0 allowing the use of newer versions.
+- Updated test fixtures to use stdlib 6.3.0.
+
 ## [0.9.9] - 2018-09-06
 ### Added
 - Merged PR#5 from treyormsbee to add lwpbootstrap option which allows
@@ -71,8 +77,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Initial code.
 - Bundled a copy of cpanminus for bootstrapping.
 
-[Unreleased]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.9...HEAD
-[0.9.8]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.8...v0.9.9
+[Unreleased]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.10...HEAD
+[0.9.10]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.9...v0.9.10
+[0.9.9]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.8...v0.9.9
 [0.9.8]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.6...v0.9.8
 [0.9.6]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.5...v0.9.6
 [0.9.5]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.4...v0.9.5
