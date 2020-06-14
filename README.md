@@ -66,7 +66,7 @@ installation respectively.
 
 ## Reference
 
-The `cpanm` class currently supports one parameter:
+The `cpanm` class currently supports the following parameters:
 
 * `mirror`
   A CPAN mirror to use to retrieve App::cpanminus. This is passed to
