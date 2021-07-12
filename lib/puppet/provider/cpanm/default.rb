@@ -52,7 +52,7 @@ Puppet::Type.type(:cpanm).provide(:default) do
       options << "-f"
     end
 
-    if @resource[:test] == :false || @resource[:test] = false
+    if @resource[:test] == :false || @resource[:test] == false
       options << "-n"
     end
 
