@@ -82,7 +82,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Bundled a copy of cpanminus for bootstrapping.
 
 [Unreleased]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.11...HEAD
-[0.9.10]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.10...v0.9.11
+[0.9.11]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.10...v0.9.11
 [0.9.10]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.9...v0.9.10
 [0.9.9]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.8...v0.9.9
 [0.9.8]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.6...v0.9.8
