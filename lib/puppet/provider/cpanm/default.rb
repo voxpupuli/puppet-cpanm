@@ -48,11 +48,11 @@ Puppet::Type.type(:cpanm).provide(:default) do
       options << @resource[:mirror]
     end
 
-    if @resource[:force] == :true
+    if @resource[:force] == :true || @resource[:force] == true
       options << "-f"
     end
 
-    if @resource[:test] == :false
+    if @resource[:test] == :false || @resource[:test] == false
       options << "-n"
     end
 
