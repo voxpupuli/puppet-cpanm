@@ -5,6 +5,14 @@ Puppet::Type.type(:cpanm).provide(:default) do
   commands :perl => 'perl'
   commands :perldoc => 'perldoc'
 
+
+  # ruby is lacking many features, this one is a basic example
+  class Object
+    def is_number?
+      to_f.to_s == to_s || to_i.to_s == to_s
+    end
+  end
+
   # Override the `commands`-generated cpanm method to avoid resetting locale to 'C'
   # Avoids triggering an old Encode bug in MakeMakeFiles for some modules
   def cpanm(*args)
@@ -17,7 +25,13 @@ Puppet::Type.type(:cpanm).provide(:default) do
 
   def latest?
     begin
-      installed=perl "-m#{@resource[:name]}", "-eprint $#{@resource[:name]}::VERSION",  '2>/dev/null'
+      name = @resource[:name]
+      if name.include? "@"
+        name_parts = name.split('@')
+        name = "#{name_parts[0]}"
+        version = "#{name_parts[1]}"
+      end
+      installed = `perl -m#{name} -e 'print $#{name}::VERSION'`
     rescue Puppet::ExecutionFailure
       installed=''
     end
@@ -74,7 +88,27 @@ Puppet::Type.type(:cpanm).provide(:default) do
 
   def exists?
     begin
-      perl "-m#{@resource[:name]}", '-e1', '>/dev/null', '2>&1'
+      name = @resource[:name]
+      if name.include? "@"
+        name_parts = name.split('@')
+        name = "#{name_parts[0]}"
+        version = "#{name_parts[1]}"
+      end
+      installed = `perl -m#{name} -e 'print $#{name}::VERSION' 2>&1`
+      if $? != 0
+        raise Puppet::ExecutionFailure, installed
+      end
+      if version.is_number?
+        if installed.eql? version
+          Puppet.debug("Debugging message - versions of #{name} are identical: installed:#{installed} vs requested:#{version}")
+          true
+        else
+          Puppet.debug("Debugging message - versions of #{name} are different: installed:#{installed} vs requested:#{version}")
+          false
+        end
+      else
+        true
+      end
     rescue Puppet::ExecutionFailure
       false
     end
