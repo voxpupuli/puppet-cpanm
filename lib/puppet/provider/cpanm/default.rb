@@ -30,7 +30,7 @@ Puppet::Type.type(:cpanm).provide(:default) do
         name = "#{name_parts[0]}"
         version = "#{name_parts[1]}"
       end
-      installed = `perl -m#{name} -e 'print $#{name}::VERSION'`
+      installed = `perl -e 'require Module::Metadata; $meta = Module::Metadata->new_from_module("#{name}"); if ($meta) {print $meta->version} else {exit 1}'`
     rescue Puppet::ExecutionFailure
       installed=''
     end
@@ -93,7 +93,7 @@ Puppet::Type.type(:cpanm).provide(:default) do
         name = "#{name_parts[0]}"
         version = "#{name_parts[1]}"
       end
-      installed = `perl -m#{name} -e 'print $#{name}::VERSION' 2>&1`
+      installed = `perl -e 'require Module::Metadata; $meta = Module::Metadata->new_from_module("#{name}"); if ($meta) {print $meta->version} else {exit 1}'`
       if $? != 0
         raise Puppet::ExecutionFailure, installed
       end
