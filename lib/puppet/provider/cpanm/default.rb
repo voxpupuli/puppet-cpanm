@@ -5,8 +5,7 @@ Puppet::Type.type(:cpanm).provide(:default) do
   commands :perl => 'perl'
   commands :perldoc => 'perldoc'
 
-
-  # ruby is lacking many features, this one is a basic example
+  # add a method to check if an object is a number
   class Object
     def is_number?
       to_f.to_s == to_s || to_i.to_s == to_s
