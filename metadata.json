@@ -1,6 +1,6 @@
 {
   "name": "jamesmcdonald-cpanm",
-  "version": "0.9.12",
+  "version": "0.9.13",
   "author": "James McDonald <james@jamesmcdonald.com>",
   "summary": "Manage perl modules with cpanminus",
   "license": "Artistic-1.0-Perl",
@@ -14,7 +14,7 @@
     },
     {
       "operatingsystem": "Debian",
-      "operatingsystemrelease": ["8.0", "9.0"]
+      "operatingsystemrelease": ["8.0", "9.0", "10.0"]
     }
   ],
   "dependencies": [

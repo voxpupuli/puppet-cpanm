@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.9.13] - 2022-04-20
+### Changed
+- Fixed #11 from gremble regarding modules where detection of an
+  installed version failed. Use `Module::Metadata` to get
+  this information more reliably.
+
 ## [0.9.12] - 2021-10-13
 ### Changed
 - Merged PR#10 from xiconfjs to allow `@version` in module names.
@@ -85,7 +91,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Initial code.
 - Bundled a copy of cpanminus for bootstrapping.
 
-[Unreleased]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.12..HEAD
+[Unreleased]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.13..HEAD
+[0.9.13]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.12..v0.9.13
 [0.9.12]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.11...v0.9.12
 [0.9.11]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.10...v0.9.11
 [0.9.10]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.9...v0.9.10
