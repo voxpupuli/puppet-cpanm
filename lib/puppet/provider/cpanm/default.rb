@@ -5,13 +5,6 @@ Puppet::Type.type(:cpanm).provide(:default) do
   commands :perl => 'perl'
   commands :perldoc => 'perldoc'
 
-  # add a method to check if an object is a number
-  class Object
-    def is_number?
-      to_f.to_s == to_s || to_i.to_s == to_s
-    end
-  end
-
   # Override the `commands`-generated cpanm method to avoid resetting locale to 'C'
   # Avoids triggering an old Encode bug in MakeMakeFiles for some modules
   def cpanm(*args)
@@ -25,11 +18,7 @@ Puppet::Type.type(:cpanm).provide(:default) do
   def latest?
     begin
       name = @resource[:name]
-      if name.include? "@"
-        name_parts = name.split('@')
-        name = "#{name_parts[0]}"
-        version = "#{name_parts[1]}"
-      end
+      name = name.split('@')[0]
       installed = `perl -e 'require Module::Metadata; $meta = Module::Metadata->new_from_module("#{name}"); if ($meta) {print $meta->version} else {exit 1}'`
     rescue Puppet::ExecutionFailure
       installed=''
@@ -88,16 +77,12 @@ Puppet::Type.type(:cpanm).provide(:default) do
   def exists?
     begin
       name = @resource[:name]
-      if name.include? "@"
-        name_parts = name.split('@')
-        name = "#{name_parts[0]}"
-        version = "#{name_parts[1]}"
-      end
+      name, version = name.split('@')
       installed = `perl -e 'require Module::Metadata; $meta = Module::Metadata->new_from_module("#{name}"); if ($meta) {print $meta->version} else {exit 1}'`
       if $? != 0
         raise Puppet::ExecutionFailure, installed
       end
-      if version.is_number?
+      if not version.nil? and not version.empty?
         if installed.eql? version
           Puppet.debug("Debugging message - versions of #{name} are identical: installed:#{installed} vs requested:#{version}")
           true
