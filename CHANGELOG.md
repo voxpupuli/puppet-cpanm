@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [0.9.14] - 2023-03-21
 ### Changed
-- Merged PR#10 from kuleuven to allow stdlib versions <8.
+- Merged PR#10 from jovandeginst to allow stdlib versions <8.
 
 ## [0.9.13] - 2022-04-20
 ### Changed
