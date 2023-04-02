@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.9.16] - 2023-04-02
+### Changed
+- Merged PR#14 (fixing #13) to fix checks for `@version`.
+
 ## [0.9.15] - 2023-03-21
 ### Changed
 - Merged PR#10 from jovandeginst to allow stdlib versions <8.
@@ -95,7 +99,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Initial code.
 - Bundled a copy of cpanminus for bootstrapping.
 
-[Unreleased]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.15..HEAD
+[Unreleased]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.16..HEAD
+[0.9.16]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.15..v0.9.16
 [0.9.15]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.13..v0.9.15
 [0.9.13]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.12..v0.9.13
 [0.9.12]: https://github.com/jamesmcdonald/puppet-cpanm/compare/v0.9.11...v0.9.12
