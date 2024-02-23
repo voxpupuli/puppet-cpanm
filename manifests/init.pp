@@ -38,7 +38,7 @@ class cpanm (
   Optional[String] $mirror = undef,
   Boolean $lwpbootstraparg = false,
 ) {
-  if $facts['os']['family'] == 'RedHat' and $facts['os']['release']['major'] in ['6','7'] {
+  if $facts['os']['family'] == 'RedHat' {
     $packages = ['perl', 'make', 'gcc', 'perl-core']
   } else {
     $packages = ['perl', 'make', 'gcc']

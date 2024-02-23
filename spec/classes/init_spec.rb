@@ -4,9 +4,6 @@ describe 'cpanm' do
     let(:facts) { {
       :os => {
         :family => "Debian",
-        :release => {
-          :major => "8"
-        }
       }
     } }
     it { should contain_class('cpanm') }
@@ -26,9 +23,6 @@ describe 'cpanm' do
     let(:facts) { {
       :os => {
         :family => "Debian",
-        :release => {
-          :major => "8"
-        }
       }
     } }
     it { should contain_class('cpanm') }
@@ -51,9 +45,6 @@ describe 'cpanm' do
     let(:facts) { {
       :os => {
         :family => "Debian",
-        :release => {
-          :major => "8"
-        }
       }
     } }
     it { should contain_class('cpanm')
@@ -73,9 +64,6 @@ describe 'cpanm' do
     let(:facts) { {
       :os => {
         :family => "RedHat",
-        :release => {
-          :major => "7"
-        }
       }
     } }
     it { should contain_class('cpanm') }
@@ -99,9 +87,6 @@ describe 'cpanm' do
     let(:facts) { {
       :os => {
         :family => "RedHat",
-        :release => {
-          :major => "7"
-        }
       }
     } }
     it { should contain_class('cpanm')
