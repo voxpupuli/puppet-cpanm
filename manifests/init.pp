@@ -6,9 +6,12 @@
 # Parameters
 # ----------
 #
-# * `mirror`
+# @param mirror
 # A CPAN mirror to use to retrieve App::cpanminus. This is passed to
 # `cpanm` as `--from`, meaning that only this mirror will be used.
+#
+# @param lwpbootstraparg
+# cpanminus bootstrap arguments
 #
 # Examples
 # --------
@@ -32,22 +35,21 @@
 # Copyright 2016-2017 James McDonald, unless otherwise noted.
 #
 class cpanm (
-  $mirror          = undef,
-  $lwpbootstraparg = false,
-){
-  if $::osfamily == 'RedHat' and $::operatingsystemmajrelease in ['6','7'] {
+  Optional[String] $mirror = undef,
+  Boolean $lwpbootstraparg = false,
+) {
+  if $facts['os']['family'] == 'RedHat' {
     $packages = ['perl', 'make', 'gcc', 'perl-core']
   } else {
     $packages = ['perl', 'make', 'gcc']
   }
 
-  ensure_packages($packages, { 'ensure' => 'present'})
+  ensure_packages($packages, { 'ensure' => 'present' })
 
-  file {'/var/cache/cpanm-install':
+  file { '/var/cache/cpanm-install':
     ensure => file,
     source => 'puppet:///modules/cpanm/cpanm',
   }
-
 
   $from = $mirror ? {
     undef   => '',
@@ -60,7 +62,7 @@ class cpanm (
     $lwparg = ''
   }
 
-  exec {"/usr/bin/perl /var/cache/cpanm-install ${from} -n App::cpanminus ${lwparg}":
+  exec { "/usr/bin/perl /var/cache/cpanm-install ${from} -n App::cpanminus ${lwparg}":
     unless  => '/usr/bin/test -x /usr/bin/cpanm -o -x /usr/local/bin/cpanm',
     require => [File['/var/cache/cpanm-install'], Package['perl', 'gcc']],
   }

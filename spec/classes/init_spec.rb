@@ -2,8 +2,9 @@ require 'spec_helper'
 describe 'cpanm' do
   context 'on Debian with default parameters' do
     let(:facts) { {
-      :osfamily => "Debian",
-      :operatingsystemmajrelease => "8"
+      :os => {
+        :family => "Debian",
+      }
     } }
     it { should contain_class('cpanm') }
     it { should contain_package('perl') }
@@ -20,8 +21,9 @@ describe 'cpanm' do
         { :mirror => 'http://mirror.test.anywhere/cpan/' }
     }
     let(:facts) { {
-      :osfamily => "Debian",
-      :operatingsystemmajrelease => "8"
+      :os => {
+        :family => "Debian",
+      }
     } }
     it { should contain_class('cpanm') }
     it { should contain_package('perl') }
@@ -41,8 +43,9 @@ describe 'cpanm' do
         }
     }
     let(:facts) { {
-      :osfamily => "Debian",
-      :operatingsystemmajrelease => "8"
+      :os => {
+        :family => "Debian",
+      }
     } }
     it { should contain_class('cpanm')
       .with_mirror('http://mirror.test.anywhere/cpan/')
@@ -59,8 +62,9 @@ describe 'cpanm' do
   end
   context 'on RHEL7 with default parameters' do
     let(:facts) { {
-      :osfamily => "RedHat",
-      :operatingsystemmajrelease => "7"
+      :os => {
+        :family => "RedHat",
+      }
     } }
     it { should contain_class('cpanm') }
     it { should contain_package('perl') }
@@ -81,8 +85,9 @@ describe 'cpanm' do
         }
     }
     let(:facts) { {
-      :osfamily => "RedHat",
-      :operatingsystemmajrelease => "7"
+      :os => {
+        :family => "RedHat",
+      }
     } }
     it { should contain_class('cpanm')
       .with_mirror('http://mirror.test.anywhere/cpan/')
