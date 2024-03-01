@@ -10,6 +10,13 @@
 # Path/url to the cpanm installer.
 # Defaults to https://cpanmin.us
 #
+# @param manage_dependencies
+# Wither this module shuld manage the following dependencies
+# - curl
+# - purl
+# - make
+#  - gcc
+#
 # @param mirror
 # A CPAN mirror to use to retrieve App::cpanminus. This is passed to
 # `cpanm` as `--from`, meaning that only this mirror will be used.
@@ -40,16 +47,22 @@
 #
 class cpanm (
   String $installer = 'https://cpanmin.us',
+  Boolean $manage_dependencies = true,
   Optional[String] $mirror = undef,
   Boolean $lwpbootstraparg = false,
 ) {
   if $facts['os']['family'] == 'RedHat' {
-    $packages = ['perl', 'make', 'gcc', 'perl-core']
+    $packages = ['curl', 'perl', 'make', 'gcc', 'perl-core']
   } else {
-    $packages = ['perl', 'make', 'gcc']
+    $packages = ['curl', 'perl', 'make', 'gcc']
   }
 
-  ensure_packages($packages, { 'ensure' => 'present' })
+  if $manage_dependencies {
+    ensure_packages($packages, {
+        'ensure' => 'present',
+        'before' => Exec['install cpanminus'],
+    })
+  }
 
   $from = $mirror ? {
     undef   => '',
@@ -62,8 +75,8 @@ class cpanm (
     $lwparg = ''
   }
 
-  exec { "/usr/bin/curl -L ${installer} | /usr/bin/perl - ${from} -n App::cpanminus ${lwparg}":
+  exec { 'install cpanminus':
+    command => "/usr/bin/curl -L ${installer} | /usr/bin/perl - ${from} -n App::cpanminus ${lwparg}",
     unless  => '/usr/bin/test -x /usr/bin/cpanm -o -x /usr/local/bin/cpanm',
-    require => [Package['perl', 'gcc']],
   }
 }
