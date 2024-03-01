@@ -12,7 +12,7 @@ describe 'cpanm' do
     it { should contain_package('make') }
     it { should_not contain_package('perl-core') }
     it { should contain_file('/var/cache/cpanm-install')
-      .with_source('puppet:///modules/cpanm/cpanm')
+      .with_source('https://cpanmin.us')
     }
     it { should contain_exec('/usr/bin/perl /var/cache/cpanm-install  -n App::cpanminus ') }
   end
@@ -31,7 +31,7 @@ describe 'cpanm' do
     it { should contain_package('make') }
     it { should_not contain_package('perl-core') }
     it { should contain_file('/var/cache/cpanm-install')
-      .with_source('puppet:///modules/cpanm/cpanm')
+      .with_source('https://cpanmin.us')
     }
     it { should contain_exec('/usr/bin/perl /var/cache/cpanm-install --from http://mirror.test.anywhere/cpan/ -n App::cpanminus ') }
   end
@@ -56,7 +56,7 @@ describe 'cpanm' do
     it { should contain_package('make') }
     it { should_not contain_package('perl-core') }
     it { should contain_file('/var/cache/cpanm-install')
-      .with_source('puppet:///modules/cpanm/cpanm')
+      .with_source('https://cpanmin.us')
     }
     it { should contain_exec('/usr/bin/perl /var/cache/cpanm-install --from http://mirror.test.anywhere/cpan/ -n App::cpanminus --no-lwp') }
   end
@@ -72,7 +72,7 @@ describe 'cpanm' do
     it { should contain_package('make') }
     it { should contain_package('perl-core') }
     it { should contain_file('/var/cache/cpanm-install')
-      .with_source('puppet:///modules/cpanm/cpanm')
+      .with_source('https://cpanmin.us')
     }
     it { should contain_exec('/usr/bin/perl /var/cache/cpanm-install  -n App::cpanminus ') }
   end
@@ -98,7 +98,7 @@ describe 'cpanm' do
     it { should contain_package('make') }
     it { should contain_package('perl-core') }
     it { should contain_file('/var/cache/cpanm-install')
-      .with_source('puppet:///modules/cpanm/cpanm')
+      .with_source('https://cpanmin.us')
     }
     it { should contain_exec('/usr/bin/perl /var/cache/cpanm-install --from http://mirror.test.anywhere/cpan/ -n App::cpanminus --no-lwp') }
   end
