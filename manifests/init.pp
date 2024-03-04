@@ -1,49 +1,32 @@
-# Class: cpanm
-# ===========================
 #
-# Full description of class cpanm here.
-#
-# Parameters
-# ----------
+# @summary Downloads and installs cpanminus.
 #
 # @param installer
-# Path/url to the cpanm installer.
-# Defaults to https://cpanmin.us
+#   Url to the cpanm installer.
 #
 # @param manage_dependencies
-# Wither this module shuld manage the following dependencies
-# - curl
-# - purl
-# - make
-#  - gcc
+#   Wether this module should manage the following dependencies
+#   - purl
+#   - purl-core (rhel7)
+#   - make
+#   - gcc
 #
 # @param mirror
-# A CPAN mirror to use to retrieve App::cpanminus. This is passed to
-# `cpanm` as `--from`, meaning that only this mirror will be used.
+#   A CPAN mirror to use to retrieve App::cpanminus. This is passed to
+#   `cpanm` as `--from`, meaning that only this mirror will be used.
 #
 # @param lwpbootstraparg
-# cpanminus bootstrap arguments
-#
-# Examples
-# --------
+#   cpanminus bootstrap arguments
 #
 # @example
-#    include cpanm
+#   include cpanm
 #
 # @example
-#    class {'cpanm':
-#      mirror =>  'http://mirror.my.org/cpan/',
-#    }
+#   class {'cpanm':
+#     mirror =>  'http://mirror.my.org/cpan/',
+#   }
 #
-# Authors
-# -------
-#
-# James McDonald <james@jamesmcdonald.com>
-#
-# Copyright
-# ---------
-#
-# Copyright 2016-2017 James McDonald, unless otherwise noted.
+# @author James McDonald <james@jamesmcdonald.com>
 #
 class cpanm (
   Cpanm::HTTPUrl $installer = 'https://cpanmin.us',
@@ -52,9 +35,9 @@ class cpanm (
   Boolean $lwpbootstraparg = false,
 ) {
   if $facts['os']['family'] == 'RedHat' and $facts['os']['release']['major'] < '8' {
-    $packages = ['curl', 'perl', 'make', 'gcc', 'perl-core']
+    $packages = ['perl', 'make', 'gcc', 'perl-core']
   } else {
-    $packages = ['curl', 'perl', 'make', 'gcc']
+    $packages = ['perl', 'make', 'gcc']
   }
 
   if $manage_dependencies {

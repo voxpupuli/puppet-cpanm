@@ -1,4 +1,5 @@
 .bundle/config
 spec/fixtures
 log/
+.yardoc/
 Gemfile.lock
