@@ -46,9 +46,9 @@
 # Copyright 2016-2017 James McDonald, unless otherwise noted.
 #
 class cpanm (
-  String $installer = 'https://cpanmin.us',
+  Cpanm::HTTPUrl $installer = 'https://cpanmin.us',
   Boolean $manage_dependencies = true,
-  Optional[String] $mirror = undef,
+  Optional[Cpanm::HTTPUrl] $mirror = undef,
   Boolean $lwpbootstraparg = false,
 ) {
   if $facts['os']['family'] == 'RedHat' {
@@ -58,10 +58,9 @@ class cpanm (
   }
 
   if $manage_dependencies {
-    ensure_packages($packages, {
-        'ensure' => 'present',
-        'before' => Exec['install cpanminus'],
-    })
+    package { $packages:
+      before => Exec['install cpanminus'],
+    }
   }
 
   $from = $mirror ? {
