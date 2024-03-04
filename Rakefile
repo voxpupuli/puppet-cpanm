@@ -1,32 +1,44 @@
-require 'puppetlabs_spec_helper/rake_tasks'
-require 'puppet-lint/tasks/puppet-lint'
-require 'metadata-json-lint/rake_task'
+# Managed by modulesync - DO NOT EDIT
+# https://voxpupuli.org/docs/updating-files-managed-with-modulesync/
 
-if RUBY_VERSION >= '1.9'
-  require 'rubocop/rake_task'
-  RuboCop::RakeTask.new
-end
-
-PuppetLint.configuration.send('disable_80chars')
-PuppetLint.configuration.relative = true
-PuppetLint.configuration.ignore_paths = ['spec/**/*.pp', 'pkg/**/*.pp']
-
-desc 'Validate manifests, templates, and ruby files'
-task :validate do
-  Dir['manifests/**/*.pp'].each do |manifest|
-    sh "puppet parser validate --noop #{manifest}"
-  end
-  Dir['spec/**/*.rb', 'lib/**/*.rb'].each do |ruby_file|
-    sh "ruby -c #{ruby_file}" unless ruby_file =~ %r{spec/fixtures}
-  end
-  Dir['templates/**/*.erb'].each do |template|
-    sh "erb -P -x -T '-' #{template} | ruby -c"
+# Attempt to load voxpupuli-test (which pulls in puppetlabs_spec_helper),
+# otherwise attempt to load it directly.
+begin
+  require 'voxpupuli/test/rake'
+rescue LoadError
+  begin
+    require 'puppetlabs_spec_helper/rake_tasks'
+  rescue LoadError
   end
 end
 
-desc 'Run metadata_lint, lint, validate, and spec tests.'
-task :test do
-  [:metadata_lint, :lint, :validate, :spec].each do |test|
-    Rake::Task[test].invoke
+# load optional tasks for acceptance
+# only available if gem group releases is installed
+begin
+  require 'voxpupuli/acceptance/rake'
+rescue LoadError
+end
+
+# load optional tasks for releases
+# only available if gem group releases is installed
+begin
+  require 'voxpupuli/release/rake_tasks'
+rescue LoadError
+  # voxpupuli-release not present
+else
+  GCGConfig.user = 'voxpupuli'
+  GCGConfig.project = 'puppet-jira'
+end
+
+desc "Run main 'test' task and report merged results to coveralls"
+task test_with_coveralls: [:test] do
+  if Dir.exist?(File.expand_path('../lib', __FILE__))
+    require 'coveralls/rake/task'
+    Coveralls::RakeTask.new
+    Rake::Task['coveralls:push'].invoke
+  else
+    puts 'Skipping reporting to coveralls.  Module has no lib dir'
   end
 end
+
+# vim: syntax=ruby

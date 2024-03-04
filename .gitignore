@@ -1,3 +1,4 @@
 .bundle/config
 spec/fixtures
+log/
 Gemfile.lock
