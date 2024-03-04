@@ -1,105 +1,115 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
+
 describe 'cpanm' do
   context 'on Debian with default parameters' do
-    let(:facts) { {
-      :os => {
-        :family => "Debian",
-      }
-    } }
-    it { should contain_class('cpanm') }
-    it { should contain_package('perl') }
-    it { should contain_package('gcc') }
-    it { should contain_package('make') }
-    it { should_not contain_package('perl-core') }
-    it { should contain_file('/var/cache/cpanm-install')
-      .with_source('https://cpanmin.us')
-    }
-    it { should contain_exec('/usr/bin/perl /var/cache/cpanm-install  -n App::cpanminus ') }
-  end
-  context 'on Debian with mirror' do
-    let(:params) {
-        { :mirror => 'http://mirror.test.anywhere/cpan/' }
-    }
-    let(:facts) { {
-      :os => {
-        :family => "Debian",
-      }
-    } }
-    it { should contain_class('cpanm') }
-    it { should contain_package('perl') }
-    it { should contain_package('gcc') }
-    it { should contain_package('make') }
-    it { should_not contain_package('perl-core') }
-    it { should contain_file('/var/cache/cpanm-install')
-      .with_source('https://cpanmin.us')
-    }
-    it { should contain_exec('/usr/bin/perl /var/cache/cpanm-install --from http://mirror.test.anywhere/cpan/ -n App::cpanminus ') }
-  end
-  context 'on Debian with mirror and lwpbootstraparg ' do
-    let(:params) {
-        {
-          :mirror          => 'http://mirror.test.anywhere/cpan/',
-          :lwpbootstraparg => true
+    let(:facts) do
+      {
+        os: {
+          family: 'Debian',
         }
-    }
-    let(:facts) { {
-      :os => {
-        :family => "Debian",
       }
-    } }
-    it { should contain_class('cpanm')
-      .with_mirror('http://mirror.test.anywhere/cpan/')
-      .with_lwpbootstraparg(true)
+    end
+
+    it { is_expected.to contain_class('cpanm') }
+    it { is_expected.to contain_package('perl') }
+    it { is_expected.to contain_package('gcc') }
+    it { is_expected.to contain_package('make') }
+    it { is_expected.not_to contain_package('perl-core') }
+
+    it {
+      is_expected.to contain_exec('install cpanminus').
+        with_command('/usr/bin/curl -L https://cpanmin.us | /usr/bin/perl -  -n App::cpanminus ')
     }
-    it { should contain_package('perl') }
-    it { should contain_package('gcc') }
-    it { should contain_package('make') }
-    it { should_not contain_package('perl-core') }
-    it { should contain_file('/var/cache/cpanm-install')
-      .with_source('https://cpanmin.us')
-    }
-    it { should contain_exec('/usr/bin/perl /var/cache/cpanm-install --from http://mirror.test.anywhere/cpan/ -n App::cpanminus --no-lwp') }
-  end
-  context 'on RHEL7 with default parameters' do
-    let(:facts) { {
-      :os => {
-        :family => "RedHat",
-      }
-    } }
-    it { should contain_class('cpanm') }
-    it { should contain_package('perl') }
-    it { should contain_package('gcc') }
-    it { should contain_package('make') }
-    it { should contain_package('perl-core') }
-    it { should contain_file('/var/cache/cpanm-install')
-      .with_source('https://cpanmin.us')
-    }
-    it { should contain_exec('/usr/bin/perl /var/cache/cpanm-install  -n App::cpanminus ') }
   end
 
-  context 'on RHEL7 with mirror and lwpbootstraparg ' do
-    let(:params) {
-        {
-          :mirror          => 'http://mirror.test.anywhere/cpan/',
-          :lwpbootstraparg => true
-        }
-    }
-    let(:facts) { {
-      :os => {
-        :family => "RedHat",
+  context 'on Debian with installer, mirror and lwpbootstraparg' do
+    let(:params) do
+      {
+        installer: 'https://cpanmin.localdomain',
+        mirror: 'http://mirror.test.anywhere/cpan/',
+        lwpbootstraparg: true
       }
-    } }
-    it { should contain_class('cpanm')
-      .with_mirror('http://mirror.test.anywhere/cpan/')
-      .with_lwpbootstraparg(true)
+    end
+    let(:facts) do
+      {
+        os: {
+          family: 'Debian',
+        }
+      }
+    end
+
+    it {
+      is_expected.to contain_class('cpanm').
+        with_installer('https://cpanmin.localdomain').
+        with_mirror('http://mirror.test.anywhere/cpan/').
+        with_lwpbootstraparg(true)
     }
-    it { should contain_package('perl') }
-    it { should contain_package('gcc') }
-    it { should contain_package('make') }
-    it { should contain_package('perl-core') }
-    it { should contain_file('/var/cache/cpanm-install')
-      .with_source('https://cpanmin.us')
+
+    it { is_expected.to contain_package('perl') }
+    it { is_expected.to contain_package('gcc') }
+    it { is_expected.to contain_package('make') }
+    it { is_expected.not_to contain_package('perl-core') }
+
+    it {
+      is_expected.to contain_exec('install cpanminus').
+        with_command('/usr/bin/curl -L https://cpanmin.localdomain | /usr/bin/perl - --from http://mirror.test.anywhere/cpan/ -n App::cpanminus --no-lwp')
     }
-    it { should contain_exec('/usr/bin/perl /var/cache/cpanm-install --from http://mirror.test.anywhere/cpan/ -n App::cpanminus --no-lwp') }
+  end
+
+  context 'on RHEL7 with default parameters' do
+    let(:facts) do
+      {
+        os: {
+          family: 'RedHat',
+        }
+      }
+    end
+
+    it { is_expected.to contain_class('cpanm') }
+    it { is_expected.to contain_package('perl') }
+    it { is_expected.to contain_package('gcc') }
+    it { is_expected.to contain_package('make') }
+    it { is_expected.to contain_package('perl-core') }
+
+    it {
+      is_expected.to contain_exec('install cpanminus').
+        with_command('/usr/bin/curl -L https://cpanmin.us | /usr/bin/perl -  -n App::cpanminus ')
+    }
+  end
+
+  context 'on RHEL7 with installer, mirror and lwpbootstraparg' do
+    let(:params) do
+      {
+        installer: 'https://cpanmin.localdomain',
+        mirror: 'http://mirror.test.anywhere/cpan/',
+        lwpbootstraparg: true
+      }
+    end
+    let(:facts) do
+      {
+        os: {
+          family: 'RedHat',
+        }
+      }
+    end
+
+    it {
+      is_expected.to contain_class('cpanm').
+        with_installer('https://cpanmin.localdomain').
+        with_mirror('http://mirror.test.anywhere/cpan/').
+        with_lwpbootstraparg(true)
+    }
+
+    it { is_expected.to contain_package('perl') }
+    it { is_expected.to contain_package('gcc') }
+    it { is_expected.to contain_package('make') }
+    it { is_expected.to contain_package('perl-core') }
+
+    it {
+      is_expected.to contain_exec('install cpanminus').
+        with_command('/usr/bin/curl -L https://cpanmin.localdomain | /usr/bin/perl - --from http://mirror.test.anywhere/cpan/ -n App::cpanminus --no-lwp')
+    }
   end
 end

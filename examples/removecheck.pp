@@ -46,4 +46,6 @@ $modules = [
   'local::lib',
 ]
 
-cpanm {$modules: ensure => absent}
+cpanm { $modules:
+  ensure => absent,
+}

@@ -4,7 +4,7 @@ $deps = [
   'openssl', 'openssl-devel',
 ]
 
-package {$deps:
+package { $deps:
   ensure => present,
 }
 
@@ -54,6 +54,6 @@ $modules = [
   'local::lib',
 ]
 
-cpanm {$modules: }
+cpanm { $modules: }
 
 Package[$deps] -> Cpanm[$modules]
