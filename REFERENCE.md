@@ -60,8 +60,8 @@ Default value: `'https://cpanmin.us'`
 Data type: `Boolean`
 
 Wether this module should manage the following dependencies
-- curl
 - purl
+- purl-core (rhel7)
 - make
 - gcc
 
