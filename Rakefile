@@ -27,7 +27,7 @@ rescue LoadError
   # voxpupuli-release not present
 else
   GCGConfig.user = 'voxpupuli'
-  GCGConfig.project = 'puppet-jira'
+  GCGConfig.project = 'puppet-cpanm'
 end
 
 desc "Run main 'test' task and report merged results to coveralls"
