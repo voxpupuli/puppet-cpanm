@@ -1,5 +1,14 @@
 # cpanm
 
+[![CI](https://github.com/voxpupuli/puppet-cpanm/actions/workflows/ci.yml/badge.svg)](https://github.com/voxpupuli/puppet-cpanm/actions/workflows/ci.yml)
+[![Code Coverage](https://coveralls.io/repos/github/voxpupuli/puppet-cpanm/badge.svg?branch=main)](https://coveralls.io/github/voxpupuli/puppet-cpanm)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/cpanm.svg)](https://forge.puppetlabs.com/puppet/cpanm)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/cpanm.svg)](https://forge.puppetlabs.com/puppet/cpanm)
+[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/cpanm.svg)](https://forge.puppetlabs.com/puppet/cpanm)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/cpanm.svg)](https://forge.puppetlabs.com/puppet/cpanm)
+[![AGPL v3 License](https://img.shields.io/github/license/voxpupuli/puppet-openssl.svg)](LICENSE)
+[![Donated by](https://img.shields.io/badge/donated%20by-James%20McDonald-fb7047.svg)](#transfer-notice)
+
 #### Table of Contents
 
 1. [Description](#description)
@@ -64,6 +73,18 @@ generally works well, but doesn't get updated when you remove a CPAN module.
 
 ## Development
 
-If you make improvements or fixes, please feel free to send a PR on Github.
-This module exists to solve a specific problem for me, but I'm quite happy to
-extend it to support other people's use cases.
+This module is maintained by [Vox Pupuli](https://voxpupuli.org/). Vox Pupuli
+welcomes new contributions to this module, especially those that include
+documentation and rspec tests. We are happy to provide guidance if necessary.
+
+Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for more details.
+
+Please log tickets and issues on github.
+
+## Transfer Notice
+
+This module was originally authored by James McDonald <james@jamesmcdonald.com>.
+The maintainer preferred that Puppet Community take ownership of the module for future improvement and maintenance.
+Existing pull requests and issues were transferred over, please fork and continue to contribute here instead.
+
+Previously: https://github.com/jamesmcdonald/puppet-cpanm
