@@ -15,7 +15,7 @@ describe 'cpanm' do
         it { is_expected.to contain_package('gcc') }
         it { is_expected.to contain_package('make') }
 
-        if ['RedHat'].include?(facts[:os][:family]) && ['7'].include?(facts[:os]['release']['major'])
+        if ['RedHat'].include?(facts[:os]['family']) && ['7'].include?(facts[:os]['release']['major'])
           it { is_expected.to contain_package('perl-core') }
         else
           it { is_expected.not_to contain_package('perl-core') }
