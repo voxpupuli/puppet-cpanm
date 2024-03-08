@@ -1,14 +1,20 @@
 {
   "name": "puppet-cpanm",
-  "version": "1.0.0",
+  "version": "1.0.1-rc0",
   "author": "Vox Pupuli",
   "summary": "Manage perl modules with cpanminus",
   "license": "Apache-2.0",
   "source": "https://github.com/voxpupuli/puppet-cpanm.git",
   "project_page": "https://github.com/voxpupuli/puppet-cpanm.git",
   "issues_url": "https://github.com/voxpupuli/puppet-cpanm/issues",
-  "tags": ["cpanm", "cpan", "perl"],
-  "dependencies": [],
+  "tags": [
+    "cpanm",
+    "cpan",
+    "perl"
+  ],
+  "dependencies": [
+
+  ],
   "requirements": [
     {
       "name": "puppet",
