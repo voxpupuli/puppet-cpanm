@@ -50,9 +50,9 @@ Puppet::Type.type(:cpanm).provide(:default) do
       options << @resource[:mirror]
     end
 
-    options << '-f' if @resource[:force] == :true || @resource[:force] == true
+    options << '-f' if [:true, true].include?(@resource[:force])
 
-    options << '-n' if @resource[:test] == :false || @resource[:test] == false
+    options << '-n' if [:false, false].include?(@resource[:test])
 
     options << @resource[:name]
 
