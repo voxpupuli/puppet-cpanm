@@ -20,10 +20,7 @@ describe 'cpanm' do
         else
           it { is_expected.not_to contain_package('perl-core') }
         end
-        it {
-          is_expected.to contain_exec('install cpanminus').
-            with_command('/usr/bin/curl -L https://cpanmin.us | /usr/bin/perl -  -n App::cpanminus ')
-        }
+        it { is_expected.to contain_exec('install cpanminus').with_command('/usr/bin/curl -L https://cpanmin.us | /usr/bin/perl -  -n App::cpanminus ') }
       end
 
       context 'with installer, mirror and lwpbootstraparg' do
@@ -31,22 +28,22 @@ describe 'cpanm' do
           {
             installer: 'https://cpanmin.localdomain',
             mirror: 'http://mirror.test.anywhere/cpan/',
-            lwpbootstraparg: true
+            lwpbootstraparg: true,
           }
         end
         let(:facts) do
           {
             os: {
               family: 'Debian',
-            }
+            },
           }
         end
 
         it {
-          is_expected.to contain_class('cpanm').
-            with_installer('https://cpanmin.localdomain').
-            with_mirror('http://mirror.test.anywhere/cpan/').
-            with_lwpbootstraparg(true)
+          is_expected.to contain_class('cpanm')
+            .with_installer('https://cpanmin.localdomain')
+            .with_mirror('http://mirror.test.anywhere/cpan/')
+            .with_lwpbootstraparg(true)
         }
 
         it { is_expected.to contain_package('perl') }
@@ -60,8 +57,8 @@ describe 'cpanm' do
         end
 
         it {
-          is_expected.to contain_exec('install cpanminus').
-            with_command('/usr/bin/curl -L https://cpanmin.localdomain | /usr/bin/perl - --from http://mirror.test.anywhere/cpan/ -n App::cpanminus --no-lwp')
+          is_expected.to contain_exec('install cpanminus')
+            .with_command('/usr/bin/curl -L https://cpanmin.localdomain | /usr/bin/perl - --from http://mirror.test.anywhere/cpan/ -n App::cpanminus --no-lwp')
         }
       end
     end
