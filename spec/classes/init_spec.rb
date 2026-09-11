@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'json'
 
 # Whether the module is expected to add the 'perl-core' package for the
 # given facts: only RedHat-family OSes with a major release older than 8.
@@ -70,29 +71,23 @@ describe 'cpanm' do
     end
   end
 
-  # Explicitly parametrized RedHat-family major release versions, including
-  # ones not (yet) present in metadata.json's operatingsystem_support. This
-  # guards against regressions in the major-version comparison logic, such
-  # as incorrectly using string comparison (e.g. '10' < '8' is true
-  # lexicographically, but false numerically).
+  # Tests the RedHat major releases declared in metadata.json's
+  # operatingsystem_support.
   context 'across RedHat-family major releases' do
-    [
-      { major: '6', perl_core: true },
-      { major: '7', perl_core: true },
-      { major: '8', perl_core: false },
-      { major: '9', perl_core: false },
-      { major: '10', perl_core: false },
-      { major: '11', perl_core: false },
-    ].each do |testcase|
-      context "on RedHat with major release '#{testcase[:major]}'" do
+    metadata = JSON.parse(File.read(File.join(__dir__, '..', '..', 'metadata.json')))
+    redhat_support = metadata['operatingsystem_support'].find { |os| os['operatingsystem'] == 'RedHat' }
+    redhat_majors = redhat_support['operatingsystemrelease']
+
+    redhat_majors.each do |major|
+      context "on RedHat with major release '#{major}'" do
         let(:facts) do
           {
             os: {
               family: 'RedHat',
               name: 'CentOS',
               release: {
-                major: testcase[:major],
-                full: "#{testcase[:major]}.0",
+                major: major,
+                full: "#{major}.0",
               },
             },
             kernel: 'Linux',
@@ -105,7 +100,7 @@ describe 'cpanm' do
         it { is_expected.to contain_package('gcc') }
         it { is_expected.to contain_package('make') }
 
-        if testcase[:perl_core]
+        if expects_perl_core?(os: { 'family' => 'RedHat', 'release' => { 'major' => major } })
           it { is_expected.to contain_package('perl-core') }
         else
           it { is_expected.not_to contain_package('perl-core') }
