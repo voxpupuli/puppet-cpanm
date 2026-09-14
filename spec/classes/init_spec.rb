@@ -3,7 +3,9 @@
 require 'spec_helper'
 
 describe 'cpanm' do
-  on_supported_os.each do |os, facts|
+  redhat_family_supported_os = RspecPuppetFacts.meta_supported_os.select { |os| %w[RedHat Rocky].include?(os['operatingsystem']) }
+
+  on_supported_os(supported_os: redhat_family_supported_os).each do |os, facts|
     context "on #{os}" do
       let :facts do
         facts
