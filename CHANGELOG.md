@@ -4,14 +4,31 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
-## [v1.0.0](https://github.com/voxpupuli/puppet-cpanm/tree/v1.0.0) (2024-03-06)
+## [v1.1.0](https://github.com/voxpupuli/puppet-cpanm/tree/v1.1.0) (2026-09-15)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-cpanm/compare/v1.0.0...v1.1.0)
+
+**Breaking changes:**
+
+- Drop puppet, update openvox minimum version to 8.19 [\#37](https://github.com/voxpupuli/puppet-cpanm/pull/37) ([TheMeier](https://github.com/TheMeier))
+
+**Implemented enhancements:**
+
+- Add support for Rocky Linux [\#48](https://github.com/voxpupuli/puppet-cpanm/pull/48) ([ogk](https://github.com/ogk))
+- Add support for RedHat 10 [\#47](https://github.com/voxpupuli/puppet-cpanm/pull/47) ([ogk](https://github.com/ogk))
+- metadata.json: Add OpenVox [\#32](https://github.com/voxpupuli/puppet-cpanm/pull/32) ([jstraw](https://github.com/jstraw))
+
+**Merged pull requests:**
+
+- Correct spelling of perl from purl in documentation [\#33](https://github.com/voxpupuli/puppet-cpanm/pull/33) ([tedgarb](https://github.com/tedgarb))
+
+## [v1.0.0](https://github.com/voxpupuli/puppet-cpanm/tree/v1.0.0) (2024-03-08)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-cpanm/compare/v0.9.17...v1.0.0)
 
 **Breaking changes:**
 
 - Download cpanm [\#17](https://github.com/voxpupuli/puppet-cpanm/pull/17) ([h-haaks](https://github.com/h-haaks))
-- Module updates; remove EOL OSes [\#16](https://github.com/voxpupuli/puppet-cpanm/pull/16) ([h-haaks](https://github.com/h-haaks))
 
 **Merged pull requests:**
 

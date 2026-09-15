@@ -1,6 +1,6 @@
 {
   "name": "puppet-cpanm",
-  "version": "1.0.1-rc0",
+  "version": "1.1.0",
   "author": "Vox Pupuli",
   "summary": "Manage perl modules with cpanminus",
   "license": "Apache-2.0",
