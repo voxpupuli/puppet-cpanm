@@ -14,12 +14,6 @@ describe 'cpanm' do
         it { is_expected.to contain_package('perl') }
         it { is_expected.to contain_package('gcc') }
         it { is_expected.to contain_package('make') }
-
-        if ['RedHat'].include?(facts[:os]['family']) && ['7'].include?(facts[:os]['release']['major'])
-          it { is_expected.to contain_package('perl-core') }
-        else
-          it { is_expected.not_to contain_package('perl-core') }
-        end
         it { is_expected.to contain_exec('install cpanminus').with_command('/usr/bin/curl -L https://cpanmin.us | /usr/bin/perl -  -n App::cpanminus ') }
       end
 
@@ -49,12 +43,6 @@ describe 'cpanm' do
         it { is_expected.to contain_package('perl') }
         it { is_expected.to contain_package('gcc') }
         it { is_expected.to contain_package('make') }
-
-        if ['RedHat'].include?(facts[:os][:family]) && ['7'].include?(facts[:os]['release']['major'])
-          it { is_expected.to contain_package('perl-core') }
-        else
-          it { is_expected.not_to contain_package('perl-core') }
-        end
 
         it {
           is_expected.to contain_exec('install cpanminus')
