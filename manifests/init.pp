@@ -34,7 +34,7 @@ class cpanm (
   Optional[Cpanm::HTTPUrl] $mirror = undef,
   Boolean $lwpbootstraparg = false,
 ) {
-  if $facts['os']['family'] == 'RedHat' and $facts['os']['release']['major'] < '8' {
+  if $facts['os']['family'] == 'RedHat' and versioncmp($facts['os']['release']['major'], '8') < 0 {
     $packages = ['perl', 'make', 'gcc', 'perl-core']
   } else {
     $packages = ['perl', 'make', 'gcc']
