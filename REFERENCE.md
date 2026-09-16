@@ -61,7 +61,6 @@ Data type: `Boolean`
 
 Wether this module should manage the following dependencies
 - perl
-- perl-core (rhel7)
 - make
 - gcc
 
