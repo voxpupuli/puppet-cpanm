@@ -41,9 +41,10 @@ class cpanm (
   }
 
   if $manage_dependencies {
-    package { $packages:
+    ensure_packages($packages, {
+      ensure => 'present',
       before => Exec['install cpanminus'],
-    }
+    })
   }
 
   $from = $mirror ? {
