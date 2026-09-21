@@ -1,3 +1,17 @@
+## [v1.0.0](https://github.com/voxpupuli/puppet-cpanm/tree/v1.0.0) (2024-03-06)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-cpanm/compare/v0.9.17...v1.0.0)
+
+**Breaking changes:**
+
+- Download cpanm [\#17](https://github.com/voxpupuli/puppet-cpanm/pull/17) ([h-haaks](https://github.com/h-haaks))
+- Module updates; remove EOL OSes [\#16](https://github.com/voxpupuli/puppet-cpanm/pull/16) ([h-haaks](https://github.com/h-haaks))
+
+**Merged pull requests:**
+
+- Final transfer changes [\#20](https://github.com/voxpupuli/puppet-cpanm/pull/20) ([h-haaks](https://github.com/h-haaks))
+- Change to Apache-2.0 license [\#18](https://github.com/voxpupuli/puppet-cpanm/pull/18) ([h-haaks](https://github.com/h-haaks))
+
 ## v0.9.17 (2023-06-01)
 ### Changed
 - Merged PR#15 from jfoche to support stdlib <9

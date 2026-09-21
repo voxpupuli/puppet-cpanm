@@ -4,6 +4,35 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v2.0.0](https://github.com/voxpupuli/puppet-cpanm/tree/v2.0.0) (2026-09-22)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-cpanm/compare/v1.0.0...v2.0.0)
+
+**Breaking changes:**
+
+- Drop Ubuntu 18.04 and 20.04 support [\#54](https://github.com/voxpupuli/puppet-cpanm/pull/54) ([ogk](https://github.com/ogk))
+- Drop Debian 11 support [\#53](https://github.com/voxpupuli/puppet-cpanm/pull/53) ([ogk](https://github.com/ogk))
+- Remove EOL operating systems Centos 7 and 8 [\#52](https://github.com/voxpupuli/puppet-cpanm/pull/52) ([ogk](https://github.com/ogk))
+- Remove EOL operating system RedHat 7 [\#51](https://github.com/voxpupuli/puppet-cpanm/pull/51) ([ogk](https://github.com/ogk))
+- Drop puppet, update openvox minimum version to 8.19 [\#37](https://github.com/voxpupuli/puppet-cpanm/pull/37) ([TheMeier](https://github.com/TheMeier))
+
+**Implemented enhancements:**
+
+- Use ensure\_packages from stdlib \#38 [\#57](https://github.com/voxpupuli/puppet-cpanm/pull/57) ([ogk](https://github.com/ogk))
+- Add Ubuntu 24.04 support [\#56](https://github.com/voxpupuli/puppet-cpanm/pull/56) ([ogk](https://github.com/ogk))
+- Add support for Rocky Linux [\#48](https://github.com/voxpupuli/puppet-cpanm/pull/48) ([ogk](https://github.com/ogk))
+- Add support for RedHat 10 [\#47](https://github.com/voxpupuli/puppet-cpanm/pull/47) ([ogk](https://github.com/ogk))
+- metadata.json: Add OpenVox [\#32](https://github.com/voxpupuli/puppet-cpanm/pull/32) ([jstraw](https://github.com/jstraw))
+
+**Closed issues:**
+
+- Use stdlib::ensure\_packages to require packages instead of Puppet package resource [\#38](https://github.com/voxpupuli/puppet-cpanm/issues/38)
+
+**Merged pull requests:**
+
+- Drop tests for perl-core package [\#55](https://github.com/voxpupuli/puppet-cpanm/pull/55) ([ogk](https://github.com/ogk))
+- Correct spelling of perl from purl in documentation [\#33](https://github.com/voxpupuli/puppet-cpanm/pull/33) ([tedgarb](https://github.com/tedgarb))
+
 ## [v1.0.0](https://github.com/voxpupuli/puppet-cpanm/tree/v1.0.0) (2024-03-06)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-cpanm/compare/v0.9.17...v1.0.0)
