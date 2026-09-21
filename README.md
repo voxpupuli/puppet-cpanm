@@ -40,7 +40,6 @@ This module will install the following packages unless manage_dependencies is se
 * perl
 * gcc
 * make
-* perl-core on RHEL7
 
 It will also install `cpanm` itself in a standard directory, generally
 `/usr/bin` or `/usr/local/bin`.
