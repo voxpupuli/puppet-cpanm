@@ -24,13 +24,13 @@ Downloads and installs cpanminus.
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 include cpanm
 ```
 
-##### 
+#####
 
 ```puppet
 class {'cpanm':
@@ -147,4 +147,3 @@ Default value: `false`
 Validate a HTTP(S) URL
 
 Alias of `Pattern[/(?i:\Ahttps?:\/\/.*\z)/]`
-

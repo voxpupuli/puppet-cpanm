@@ -36,7 +36,7 @@ class cpanm (
   $packages = ['perl', 'make', 'gcc']
 
   if $manage_dependencies {
-    ensure_packages($packages, {
+    stdlib::ensure_packages($packages, {
       ensure => 'present',
       before => Exec['install cpanminus'],
     })
