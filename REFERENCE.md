@@ -24,13 +24,13 @@ Downloads and installs cpanminus.
 
 #### Examples
 
-##### 
+#####
 
 ```puppet
 include cpanm
 ```
 
-##### 
+#####
 
 ```puppet
 class {'cpanm':
@@ -97,7 +97,7 @@ The following properties are available in the `cpanm` type.
 
 Valid values: `absent`, `present`, `installed`, `latest`
 
-Aliases: `"installed"=>"present"`
+Aliases: `"installed" => "present"`
 
 The basic property that the resource should be in.
 
@@ -147,4 +147,3 @@ Default value: `false`
 Validate a HTTP(S) URL
 
 Alias of `Pattern[/(?i:\Ahttps?:\/\/.*\z)/]`
-
