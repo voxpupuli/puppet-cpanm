@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v2.1.0](https://github.com/voxpupuli/puppet-cpanm/tree/v2.1.0) (2026-11-12)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-cpanm/compare/v2.0.0...v2.1.0)
+
+**Implemented enhancements:**
+
+- Update requirements to allow OpenVox 9 [\#60](https://github.com/voxpupuli/puppet-cpanm/pull/60) ([sebastianrakel](https://github.com/sebastianrakel))
+
+**Fixed bugs:**
+
+- Replace deprecated `ensure_packages()` with `stdlib::ensure_packages()` [\#61](https://github.com/voxpupuli/puppet-cpanm/pull/61) ([stdietrich](https://github.com/stdietrich))
+
 ## [v2.0.0](https://github.com/voxpupuli/puppet-cpanm/tree/v2.0.0) (2026-09-22)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-cpanm/compare/v1.0.0...v2.0.0)
