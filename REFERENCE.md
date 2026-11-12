@@ -97,7 +97,7 @@ The following properties are available in the `cpanm` type.
 
 Valid values: `absent`, `present`, `installed`, `latest`
 
-Aliases: `"installed"=>"present"`
+Aliases: `"installed" => "present"`
 
 The basic property that the resource should be in.
 
